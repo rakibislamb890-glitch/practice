@@ -12,13 +12,22 @@
   </head>
   <body>
     <header class="navbar-header">
-      <nav class="navbar">
-        <!-- ১. লোগো বা ব্র্যান্ডের নাম -->
+      <nav class="navbar" aria-label="Main navigation">
         <div class="navbar-brand">
           <a href="#">Voot<span>.</span> Sales</a>
         </div>
 
-        <!-- ২. মেনু বা লিঙ্কগুলোর তালিকা -->
+        <button
+          class="navbar-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
         <ul class="navbar-links">
           <li class="dropdown">
             <a href="#services" class="dropdown-toggle"
@@ -42,7 +51,6 @@
           <li><a href="#about">About</a></li>
         </ul>
 
-        <!-- ৩. ডানপাশের অ্যাকশন বাটন -->
         <div class="navbar-action">
           <a href="#strategy-call" class="btn-strategy">Book Strategy Call</a>
         </div>
@@ -502,5 +510,28 @@
         </div>
       </div>
     </section>
+
+    <script>
+      const navbar = document.querySelector('.navbar');
+      const toggle = document.querySelector('.navbar-toggle');
+
+      if (navbar && toggle) {
+        toggle.addEventListener('click', () => {
+          const isOpen = navbar.classList.toggle('nav-open');
+          toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        document.addEventListener('click', (event) => {
+          if (
+            window.innerWidth <= 768 &&
+            navbar.classList.contains('nav-open') &&
+            !navbar.contains(event.target)
+          ) {
+            navbar.classList.remove('nav-open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    </script>
   </body>
 </html>
